@@ -1,0 +1,12 @@
+Hãy đặt file nhạc nền (.mp3) của bạn vào chính thư mục này.
+
+Mặc định, config/config.js đang trỏ tới:
+  /assets/music/background.mp3
+
+=> Cách nhanh nhất: đổi tên file nhạc của bạn thành "background.mp3"
+   rồi copy vào thư mục public/assets/music/ (cùng cấp với file này).
+
+Nếu muốn dùng tên file khác, chỉ cần sửa dòng "musicFile" trong
+file config/config.js ở thư mục gốc dự án, ví dụ:
+
+  musicFile: "/assets/music/ten-file-cua-ban.mp3"

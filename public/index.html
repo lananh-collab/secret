@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <title>Chúc Mừng Sinh Nhật</title>
+
+  <!-- Google Fonts: Playfair Display (tiêu đề) + Be Vietnam Pro (nội dung, hỗ trợ tốt tiếng Việt) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link
+  href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,600&family=Be+Vietnam+Pro:wght@300;400;500;600;700&family=Montserrat:wght@700;800&display=swap"
+  rel="stylesheet"
+/>
+
+  <link rel="stylesheet" href="/css/main.css" />
+  <link rel="stylesheet" href="/css/animations.css" />
+</head>
+<body>
+
+  <!-- ======================= NỀN GALAXY (Three.js) ======================= -->
+  <!-- Canvas này chạy xuyên suốt, cố định phía sau mọi màn hình -->
+  <canvas id="starfield-canvas"></canvas>
+
+  <!-- Lớp phủ tối nhẹ để tăng độ tương phản cho nội dung phía trên nền sao -->
+  <div id="vignette-overlay"></div>
+
+  <!-- ======================= MÀN HÌNH CHÀO MỪNG ======================= -->
+  <section id="welcome-screen" class="screen">
+    <div class="welcome-content">
+      <p class="eyebrow">Một điều bất ngờ nhỏ dành cho</p>
+      <h1 id="welcome-name" class="display-name">Thu Trang</h1>
+      <p class="welcome-sub">Nhấn vào ngôi sao để mở món quà sinh nhật</p>
+      <button id="start-button" class="glow-button" type="button">
+        <span>Bắt đầu</span>
+      </button>
+    </div>
+  </section>
+
+  <!-- ======================= MÀN HÌNH ĐẾM NGƯỢC ======================= -->
+  <section id="countdown-screen" class="screen hidden">
+    <div id="countdown-number">3</div>
+  </section>
+
+  <!-- ======================= SÂN KHẤU CHÍNH: BÁNH KEM ======================= -->
+  <section id="main-scene" class="screen hidden">
+    <div id="cake-container"></div>
+
+    <div id="message-box">
+    <p id="hint-text" class="hint-text">Đang thắp nến chúc mừng... 🕯️</p>
+      <p id="typewriter-text" class="typewriter-text"></p>
+    </div>
+  </section>
+
+  <!-- ======================= LỚP PHÁO HOA (Canvas 2D) ======================= -->
+  <canvas id="fireworks-canvas" class="hidden"></canvas>
+
+  <!-- ======================= CÁC LỚP HIỆU ỨNG DOM ======================= -->
+  <div id="hearts-layer" class="fx-layer"></div>
+  <div id="balloons-layer" class="fx-layer"></div>
+  <div id="flowers-layer" class="fx-layer"></div>
+
+  <!-- ======================= MÀN HÌNH KẾT: BÓ HOA ======================= -->
+  <section id="bouquet-screen" class="screen hidden">
+    <div class="bouquet-content">
+      <div id="bouquet-graphic"></div>
+      <h2 class="bouquet-title">Chúc Mừng Sinh Nhật, <span id="bouquet-name">Lan Anh</span>!</h2>
+      <p id="bouquet-message" class="bouquet-message"></p>
+      <button id="replay-button" class="glow-button ghost" type="button">
+        <span>Xem lại từ đầu</span>
+      </button>
+    </div>
+  </section>
+
+  <!-- ======================= NHẠC NỀN ======================= -->
+  <audio id="bg-music" loop preload="auto"></audio>
+
+  <!-- Nút bật/tắt nhạc, luôn hiển thị góc màn hình sau khi nhạc đã sẵn sàng -->
+  <button id="music-toggle" class="music-toggle hidden" type="button" aria-label="Bật/tắt nhạc">🔊</button>
+
+  <!-- ======================= THƯ VIỆN NGOÀI ======================= -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+
+  <!-- ======================= CÁC MODULE CỦA DỰ ÁN (window-global pattern) ======================= -->
+  <script src="/js/config-loader.js"></script>
+  <script src="/js/starfield.js"></script>
+  <script src="/js/cake.js"></script>
+  <script src="/js/fireworks.js"></script>
+  <script src="/js/hearts.js"></script>
+  <script src="/js/balloons.js"></script>
+  <script src="/js/flowers.js"></script>
+  <script src="/js/bouquet.js"></script>
+  <script src="/js/countdown.js"></script>
+  <script src="/js/typewriter.js"></script>
+  <script src="/js/welcome.js"></script>
+  <script src="/js/audio.js"></script>
+  <script src="/js/script.js"></script>
+</body>
+</html>

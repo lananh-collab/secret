@@ -1,0 +1,343 @@
+/* ============================================================
+   DESIGN TOKENS
+   Bảng màu lấy cảm hứng từ bầu trời đêm ngân hà:
+   nền tím than sâu, điểm nhấn vàng nến ấm, hồng pháo hoa,
+   xanh cyan ánh sáng bloom.
+   ============================================================ */
+:root {
+  --bg-deep: #090a24;
+  --bg-mid: #17123f;
+  --bg-soft: #241a4f;
+
+  --gold: #ffd37a;
+  --gold-soft: #ffe9b8;
+  --rose: #ff6fa3;
+  --cyan: #7de8ff;
+  --violet: #b48cff;
+
+  --cream: #f5f0ff;
+  --cream-dim: rgba(245, 240, 255, 0.68);
+
+  --font-display: "Playfair Display", "Times New Roman", serif;
+  --font-body: "Be Vietnam Pro", "Segoe UI", sans-serif;
+
+  --shadow-glow-gold: 0 0 24px rgba(255, 211, 122, 0.55);
+  --shadow-glow-rose: 0 0 24px rgba(255, 111, 163, 0.5);
+  --shadow-glow-cyan: 0 0 24px rgba(125, 232, 255, 0.5);
+
+  --ease-soft: cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html, body {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  background: radial-gradient(ellipse at 50% 20%, var(--bg-soft) 0%, var(--bg-mid) 45%, var(--bg-deep) 100%);
+  font-family: var(--font-body);
+  color: var(--cream);
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ============================================================
+   NỀN GALAXY / CÁC LỚP CỐ ĐỊNH TOÀN MÀN HÌNH
+   ============================================================ */
+#starfield-canvas {
+  position: fixed;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 0;
+  display: block;
+}
+
+#vignette-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  background: radial-gradient(ellipse at 50% 45%, transparent 35%, rgba(6, 6, 20, 0.55) 100%);
+}
+
+#fireworks-canvas {
+  position: fixed;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 5;
+  pointer-events: none;
+}
+
+.fx-layer {
+  position: fixed;
+  inset: 0;
+  z-index: 6;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+/* ============================================================
+   HỆ THỐNG "MÀN HÌNH" (screen) - full viewport, chuyển cảnh mượt
+   ============================================================ */
+.screen {
+  position: fixed;
+  inset: 0;
+  z-index: 10;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  text-align: center;
+  padding: 24px;
+  opacity: 1;
+  transition: opacity 0.9s var(--ease-soft), visibility 0.9s;
+}
+
+.screen.hidden {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+}
+
+/* ============================================================
+   MÀN HÌNH CHÀO MỪNG
+   ============================================================ */
+.welcome-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 18px;
+  max-width: 640px;
+}
+
+.eyebrow {
+  font-size: 0.8rem;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  color: var(--cream-dim);
+  font-weight: 500;
+}
+
+.display-name {
+#countdown-number {
+  font-family: "Montserrat", sans-serif;
+  font-weight: 800;
+  font-size: clamp(6rem, 24vw, 14rem); /* giữ nguyên hoặc chỉnh số theo ý */
+  color: var(--gold-soft);
+  text-shadow: 0 0 60px rgba(255, 211, 122, 0.75);
+}
+  line-height: 1.1;
+}
+
+.welcome-sub {
+  font-size: 1rem;
+  color: var(--cream-dim);
+  margin-bottom: 8px;
+}
+
+/* ============================================================
+   NÚT BẤM PHÁT SÁNG
+   ============================================================ */
+.glow-button {
+  position: relative;
+  padding: 16px 42px;
+  border-radius: 999px;
+  border: 1px solid rgba(255, 211, 122, 0.55);
+  background: linear-gradient(180deg, rgba(255, 211, 122, 0.18), rgba(255, 211, 122, 0.05));
+  color: var(--gold-soft);
+  font-family: var(--font-body);
+  font-weight: 600;
+  font-size: 1rem;
+  letter-spacing: 0.04em;
+  cursor: pointer;
+  box-shadow: var(--shadow-glow-gold);
+  transition: transform 0.35s var(--ease-soft), box-shadow 0.35s var(--ease-soft);
+}
+
+.glow-button:hover {
+  transform: translateY(-3px) scale(1.03);
+  box-shadow: 0 0 36px rgba(255, 211, 122, 0.75);
+}
+
+.glow-button:active {
+  transform: translateY(0) scale(0.98);
+}
+
+.glow-button.ghost {
+  border-color: rgba(125, 232, 255, 0.5);
+  background: linear-gradient(180deg, rgba(125, 232, 255, 0.14), rgba(125, 232, 255, 0.04));
+  color: var(--cyan);
+  box-shadow: var(--shadow-glow-cyan);
+}
+
+.glow-button.ghost:hover {
+  box-shadow: 0 0 36px rgba(125, 232, 255, 0.75);
+}
+
+/* ============================================================
+   MÀN HÌNH ĐẾM NGƯỢC
+   ============================================================ */
+#countdown-number {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: clamp(6rem, 24vw, 14rem);
+  color: var(--gold-soft);
+  text-shadow: 0 0 60px rgba(255, 211, 122, 0.75);
+}
+
+/* ============================================================
+   SÂN KHẤU CHÍNH - BÁNH KEM
+   ============================================================ */
+#main-scene {
+  justify-content: flex-end;
+  padding-bottom: 6vh;
+}
+
+#cake-container {
+  position: absolute;
+  top: 8%;
+  left: 50%;
+  transform: translateX(-50%);
+  width: min(90vw, 640px);
+  height: min(58vh, 640px);
+}
+
+#message-box {
+  position: relative;
+  z-index: 11;
+  max-width: 620px;
+  padding: 0 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.hint-text {
+  font-size: 0.95rem;
+  color: var(--cream-dim);
+  letter-spacing: 0.02em;
+}
+
+.typewriter-text {
+  font-family: var(--font-body);
+  font-size: clamp(1rem, 2.4vw, 1.25rem);
+  line-height: 1.6;
+  color: var(--cream);
+  min-height: 1.6em;
+}
+
+.typewriter-text::after {
+  content: "";
+  display: inline-block;
+  width: 2px;
+  height: 1.1em;
+  margin-left: 2px;
+  background: var(--gold-soft);
+  vertical-align: text-bottom;
+  animation: blink-caret 0.9s step-end infinite;
+}
+
+/* ============================================================
+   MÀN HÌNH KẾT - BÓ HOA
+   ============================================================ */
+.bouquet-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 14px;
+  max-width: 620px;
+}
+
+#bouquet-graphic {
+  width: 220px;
+  height: 220px;
+  margin-bottom: 6px;
+}
+.bouquet-image {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  filter: drop-shadow(0 0 24px rgba(255, 211, 122, 0.45));
+}
+.bouquet-title {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: clamp(1.6rem, 5vw, 2.4rem);
+  color: var(--rose);
+  text-shadow: var(--shadow-glow-rose);
+}
+
+.bouquet-title span {
+  color: var(--gold-soft);
+}
+
+.bouquet-message {
+  font-size: 1rem;
+  line-height: 1.7;
+  color: var(--cream-dim);
+}
+
+/* ============================================================
+   NÚT NHẠC
+   ============================================================ */
+.music-toggle {
+  position: fixed;
+  bottom: 22px;
+  right: 22px;
+  z-index: 20;
+  width: 46px;
+  height: 46px;
+  border-radius: 50%;
+  border: 1px solid rgba(255, 211, 122, 0.4);
+  background: rgba(9, 10, 36, 0.6);
+  backdrop-filter: blur(6px);
+  color: var(--gold-soft);
+  font-size: 1.1rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.3s var(--ease-soft), box-shadow 0.3s var(--ease-soft);
+}
+
+.music-toggle:hover {
+  transform: scale(1.08);
+  box-shadow: var(--shadow-glow-gold);
+}
+
+.music-toggle.hidden {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+}
+
+/* ============================================================
+   RESPONSIVE
+   ============================================================ */
+@media (max-width: 640px) {
+  #cake-container {
+    top: 10%;
+    height: 46vh;
+  }
+  .glow-button {
+    padding: 14px 32px;
+    font-size: 0.92rem;
+  }
+  .message-box {
+    padding: 0 12px;
+  }
+}
+
+/* Tôn trọng người dùng ưu tiên giảm chuyển động */
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
