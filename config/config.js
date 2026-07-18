@@ -16,7 +16,7 @@
  */
 
 module.exports = {
-  name: "Thu Trang",
+  name: "bạn Trang",
 
   message:
     "Chúc mừng sinh nhật bạn! 🎉 Chúc bạn luôn xinh đẹp, tự tin và tràn đầy năng lượng. " +

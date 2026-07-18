@@ -14,7 +14,7 @@
   bottom: -40px;
   font-size: var(--heart-size, 22px);
   color: var(--rose);
-  filter: drop-shadow(0 0 8px rgba(255, 111, 163, 0.75));
+  filter: drop-shadow(0 0 8px rgba(109, 190, 228, 0.75));
   opacity: 0;
   animation: heart-rise linear forwards;
   will-change: transform, opacity;
