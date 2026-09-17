@@ -16,14 +16,14 @@
  */
 
 module.exports = {
-  name: "bạn Trang",
+  name: "chị HHuong",
 
   message:
     "Chúc mừng sinh nhật bạn! 🎉 Chúc bạn luôn xinh đẹp, tự tin và tràn đầy năng lượng. " +
     "Mong mọi dự định trong năm mới đều thuận lợi, mọi ước mơ đều thành hiện thực. " +
     "Cảm ơn vì đã luôn là phiên bản tuyệt vời nhất của chính mình. Chúc bạn một tuổi mới thật rực rỡ! 🎂✨",
 
-  musicFile: "/assets/music/background.mp3",
+  musicFile: "/assets/music/Download.mp3",
 
   candleCount: 6,
 

@@ -29,8 +29,8 @@
   <section id="welcome-screen" class="screen">
     <div class="welcome-content">
       <p class="eyebrow">Một điều bất ngờ nhỏ dành cho</p>
-      <h1 id="welcome-name" class="display-name">Thu Trang</h1>
-      <p class="welcome-sub">Nhấn vào ngôi sao để mở món quà sinh nhật</p>
+      <h1 id="welcome-name" class="display-name">Chị Hương</h1>
+      <p class="welcome-sub">Nhấn vào để bắt đầu</p>
       <button id="start-button" class="glow-button" type="button">
         <span>Bắt đầu</span>
       </button>
@@ -46,10 +46,17 @@
   <section id="main-scene" class="screen hidden">
     <div id="cake-container"></div>
 
-    <div id="message-box">
-    <p id="hint-text" class="hint-text">Đang thắp nến chúc mừng... 🕯️</p>
-      <p id="typewriter-text" class="typewriter-text"></p>
-    </div>
+<div id="message-box">
+  <p id="hint-text" class="hint-text">Đang thắp nến chúc mừng... 🕯️</p>
+
+  <button id="gift-button" class="glow-button" type="button">
+    <span>🎁 Mở quà</span>
+  </button>
+
+  <div id="letter-box" class="letter-box">
+    <p id="typewriter-text" class="typewriter-text"></p>
+  </div>
+</div>
   </section>
 
   <!-- ======================= LỚP PHÁO HOA (Canvas 2D) ======================= -->

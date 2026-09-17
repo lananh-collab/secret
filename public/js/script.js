@@ -57,24 +57,38 @@
     );
   }
 
-  function celebrate(config, mainScene) {
-    var hint = document.getElementById("hint-text");
-    var typewriterEl = document.getElementById("typewriter-text");
+function celebrate(config, mainScene) {
+  var hint = document.getElementById("hint-text");
+  var giftButton = document.getElementById("gift-button");
+  var letterBox = document.getElementById("letter-box");
+  var typewriterEl = document.getElementById("typewriter-text");
 
-    hint.style.opacity = "0";
+  hint.style.opacity = "0";
 
-    window.App.Typewriter.type(typewriterEl, config.message, 32);
+  // Bắt đầu hiệu ứng ăn mừng ngay khi thổi tắt hết nến
+  window.App.Fireworks.launchShow(9000);
+  window.App.Hearts.start(9500);
+  window.App.Balloons.start(11000);
+  window.App.Flowers.start(10000);
 
-    // Bắt đầu toàn bộ hiệu ứng ăn mừng cùng lúc
-    window.App.Fireworks.launchShow(9000);
-    window.App.Hearts.start(9500);
-    window.App.Balloons.start(11000);
-    window.App.Flowers.start(10000);
+  // Hiện nút "Mở quà" — người dùng bấm vào mới mở lá thư bên trong
+  giftButton.classList.add("show");
 
-    // Sau khi hiệu ứng lắng xuống, chuyển sang màn hình kết với bó hoa
-    setTimeout(function () {
-      mainScene.classList.add("hidden");
-      window.App.Bouquet.show(config.name, config.message);
-    }, 11500);
+  function onGiftClick() {
+    giftButton.removeEventListener("click", onGiftClick);
+    giftButton.classList.remove("show");
+
+    letterBox.classList.add("show");
+
+    window.App.Typewriter.type(typewriterEl, config.message, 32, function () {
+      // Đợi người dùng đọc xong lời chúc rồi mới chuyển sang màn kết
+      setTimeout(function () {
+        mainScene.classList.add("hidden");
+        window.App.Bouquet.show(config.name, config.message);
+      }, 3500);
+    });
   }
+
+  giftButton.addEventListener("click", onGiftClick);
+}
 })();
